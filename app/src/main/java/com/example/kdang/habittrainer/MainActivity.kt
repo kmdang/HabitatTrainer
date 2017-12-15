@@ -11,6 +11,8 @@ class MainActivity : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
 
-        tv_description.text = "A refreshing glass of water"
+        iv_icon.setImageResource(R.drawable.restingfrog)
+        tv_title.text = getString(R.string.drink_water)
+        tv_description.text = getString(R.string.drink_water_desc)
     }
 }
