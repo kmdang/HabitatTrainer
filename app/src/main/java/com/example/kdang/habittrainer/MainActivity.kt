@@ -17,7 +17,7 @@ class MainActivity : AppCompatActivity() {
         // Adapter -> define data
         rv.setHasFixedSize(true)
 
-        rv.LayoutManager = LinearLayoutManager(this)
+        rv.layoutManager = LinearLayoutManager(this)
         rv.adapter = HabitsAdapter(getSampleHabits())
     }
 }
