@@ -40,6 +40,7 @@
     <Button
         android:id="@+id/btn_save"
         android:text="@string/save"
+        android:onClick="saveHabit"
         android:layout_width="match_parent"
         android:layout_height="wrap_content" />
 

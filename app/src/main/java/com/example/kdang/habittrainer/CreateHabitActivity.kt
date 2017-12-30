@@ -18,9 +18,30 @@ class CreateHabitActivity : AppCompatActivity() {
 
     private val CHOOSE_IMAGE_REQUEST = 1
 
+    private var imageBitmap: Bitmap? = null
+
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_create_habit)
+    }
+
+    fun saveHabit(v: View) {
+        if (et_title.text.toString().isBlank() || et_descr.text.toString().isBlank()) {
+            Log.d(TAG, "Missing a title and/or descriptions")
+            displayErrorMessage("Missing a title and/or descriptions")
+            return
+        } else if (imageBitmap == null) {
+            Log.d(TAG, "Missing image")
+            displayErrorMessage("Missing image")
+            return
+        }
+
+        tv_error.visibility = View.INVISIBLE
+    }
+
+    private fun displayErrorMessage(errorMsg: String) {
+        tv_error.text = errorMsg
+        tv_error.visibility = View.VISIBLE
     }
 
     fun chooseImage(v: View) {
@@ -47,6 +68,7 @@ class CreateHabitActivity : AppCompatActivity() {
 
             // set the image to te xml property
             bitmap?.let {
+                this.imageBitmap = bitmap
                 iv_image.setImageBitmap(bitmap)
                 Log.d(TAG, "Read image bitmap and updated the image view")
             }
