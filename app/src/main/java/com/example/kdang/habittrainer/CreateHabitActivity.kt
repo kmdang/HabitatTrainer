@@ -9,6 +9,7 @@ import android.os.Bundle
 import android.provider.MediaStore
 import android.util.Log
 import android.view.View
+import android.widget.EditText
 import kotlinx.android.synthetic.main.activity_create_habit.*
 import java.io.IOException
 
@@ -87,3 +88,5 @@ class CreateHabitActivity : AppCompatActivity() {
 
     }
 }
+
+private fun EditText.isBlank() = this.text.toString().isBlank()
