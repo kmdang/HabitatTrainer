@@ -6,6 +6,7 @@ import android.os.Bundle
 import android.support.v7.widget.LinearLayoutManager
 import android.view.Menu
 import android.view.MenuItem
+import com.example.kdang.habittrainer.db.HabitDbTable
 import kotlinx.android.synthetic.main.activity_main.*
 
 class MainActivity : AppCompatActivity() {
@@ -21,7 +22,7 @@ class MainActivity : AppCompatActivity() {
         rv.setHasFixedSize(true)
 
         rv.layoutManager = LinearLayoutManager(this)
-//        rv.adapter = HabitsAdapter(getSampleHabits())
+        rv.adapter = HabitsAdapter(HabitDbTable(this).readAllHabits())
     }
 
     override fun onCreateOptionsMenu(menu: Menu): Boolean {
