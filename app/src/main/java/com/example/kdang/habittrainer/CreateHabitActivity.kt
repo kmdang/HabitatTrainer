@@ -10,6 +10,7 @@ import android.provider.MediaStore
 import android.util.Log
 import android.view.View
 import android.widget.EditText
+import com.example.kdang.habittrainer.db.HabitDbTable
 import kotlinx.android.synthetic.main.activity_create_habit.*
 import java.io.IOException
 
@@ -27,7 +28,7 @@ class CreateHabitActivity : AppCompatActivity() {
     }
 
     fun saveHabit(v: View) {
-        if (et_title.text.toString().isBlank() || et_descr.text.toString().isBlank()) {
+        if (et_title.isBlank() || et_descr.isBlank()) {
             Log.d(TAG, "Missing a title and/or descriptions")
             displayErrorMessage("Missing a title and/or descriptions")
             return
@@ -37,7 +38,20 @@ class CreateHabitActivity : AppCompatActivity() {
             return
         }
 
+        // Store the habit...
         tv_error.visibility = View.INVISIBLE
+        val title = et_title.text.toString()
+        val description = et_descr.text.toString()
+        val habit = Habit(title, description, imageBitmap!!)
+
+        val id = HabitDbTable(this).store(habit)
+
+        if (id == -1L) {
+            displayErrorMessage("Habit could not be stored :(")
+        } else {
+            val intent = Intent(this, MainActivity::class.java)
+            startActivity(intent)
+        }
     }
 
     private fun displayErrorMessage(errorMsg: String) {
